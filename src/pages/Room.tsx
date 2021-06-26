@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { FormEvent, useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 
@@ -16,6 +16,7 @@ type RoomParams = {
 
 export function Room() {
   const { user } = useAuth();
+  const history = useHistory();
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const [newQuestion, setNewQuestion] = useState('');
@@ -38,8 +39,14 @@ export function Room() {
       isHighlighted: false,
       isAnswered: false
     };
-    await database.ref(`rooms/${roomId}/questions`).push(question);
-    setNewQuestion('');
+    await database.ref(`rooms/${roomId}/questions`).push(question, (error) => {
+      if (error) {
+        alert('Room already closed.');
+        history.push('/');
+      } else {
+        setNewQuestion('');
+      }
+    });
   }
 
   async function handleLikeQuestion(questionId: string, likeId: string | undefined) {

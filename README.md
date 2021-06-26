@@ -20,7 +20,7 @@ O layout do projeto pode ser visualizado no link abaixo:
 
 * [Layout](https://www.figma.com/file/u0BQK8rCf2KgzcukdRRCWh/Letmeask/duplicate?node-id=0%3A1)
 
-É necessário que voce tenha uma conta no Figma.
+É necessário que você tenha uma conta no Figma.
 
 # Como executar
 
